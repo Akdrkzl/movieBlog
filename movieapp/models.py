@@ -34,7 +34,7 @@ class Cast(models.Model):
     cast_role = models.ForeignKey(Cast_Role, on_delete = models.CASCADE)
     
     def __str__(self):
-        return self.title
+        return f"{self.title} ({self.cast_role})"
 
 class Category(models.Model):
     title = models.CharField(max_length=50)
@@ -55,6 +55,11 @@ class Movie(models.Model):
 
     category = models.ManyToManyField(Category)
     cast = models.ManyToManyField(Cast)
+
+    #*Admin Panelinde bulunan tekil ve çoğul isimleri değiştirir. 
+    class Meta:
+        verbose_name = "Film"
+        verbose_name_plural = "Filmler"
 
     # def get_directors(self):
     #     directors = self.cast.get(is_director=True)
