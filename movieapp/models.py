@@ -24,7 +24,8 @@ class Cast(models.Model):
     #     ('S','Support')
     # )
 
-    title = models.CharField(max_length=100)
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
     description = models.TextField(max_length=50)
     image = models.ImageField(upload_to='cast-pic')
     gender = models.CharField(max_length=1, choices=genders)
@@ -32,9 +33,14 @@ class Cast(models.Model):
     location = models.CharField(max_length=50)
 
     cast_role = models.ForeignKey(Cast_Role, on_delete = models.CASCADE)
-    
+
+    # burada isim ve soyisimi birleştirip admin panelinde full_name'i çağırıp kullanabiliriz
+    @property
+    def full_name(self):
+        return f"{self.first_name} {self.last_name}"   
+
     def __str__(self):
-        return f"{self.title} ({self.cast_role})"
+        return f"{self.first_name} {self.last_name} ({self.cast_role})"
 
 class Category(models.Model):
     title = models.CharField(max_length=50)
