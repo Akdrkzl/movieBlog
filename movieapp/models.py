@@ -53,6 +53,7 @@ class Movie(models.Model):
     video = models.FileField(upload_to='movie-video')
     slug = AutoSlugField(populate_from='title')
 
+    category = models.ManyToManyField(Category)
     cast = models.ManyToManyField(Cast)
 
     # def get_directors(self):
