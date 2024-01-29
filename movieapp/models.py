@@ -28,16 +28,19 @@ class Cast(models.Model):
     last_name = models.CharField(max_length=100)
     description = models.TextField(max_length=50)
     image = models.ImageField(upload_to='cast-pic')
-    gender = models.CharField(max_length=1, choices=genders)
+    gender = models.CharField("Cinsiyet",max_length=1, choices=genders)
     birth = models.DateField()
     location = models.CharField(max_length=50)
 
-    cast_role = models.ForeignKey(Cast_Role, on_delete = models.CASCADE)
+    cast_role = models.ForeignKey(Cast_Role, on_delete = models.CASCADE,verbose_name='Görev')
 
-    # burada isim ve soyisimi birleştirip admin panelinde full_name'i çağırıp kullanabiliriz
+    #*burada isim ve soyisimi birleştirip admin panelinde full_name'i çağırıp kullanabiliriz
     @property
     def full_name(self):
         return f"{self.first_name} {self.last_name}"   
+
+    #*Admin panelindeki kısa açıklamayı değiştirdik 
+    full_name.fget.short_description = 'Ad Soyad'
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} ({self.cast_role})"
@@ -52,8 +55,9 @@ class Movie(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField(max_length=500)
     plot = models.TextField(max_length=100)
-    budget = models.CharField(max_length=15)
+    budget = models.DecimalField(max_digits=19, decimal_places=2)
     language = models.CharField(max_length=20)
+    cover_image = models.ImageField(upload_to='movie-pic')
     image = models.ImageField(upload_to='movie-pic')
     release_date = models.DateField()
     video = models.FileField(upload_to='movie-video')

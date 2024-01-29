@@ -26,7 +26,7 @@
                                             class="fas fa-heart text-danger"></i> 50%</h6>
                                     <small class="text-muted">8,784</small>
                                 </div>
-                                <img src="{{movie.image.url}}" class="img-fluid" alt="...">
+                                <img src="{{movie.cover_image.url}}" class="img-fluid" alt="...">
                             </div>
                         </div>
                         <div class="col-xl-3 col-lg-3">
@@ -34,18 +34,18 @@
                                 <img src="{{movie.image.url}}" class="img-fluid rounded" alt="...">
                                 <h1 class="h6 mb-0 mt-3 font-weight-bold text-gray-900">Director</h1>
                                 <p>
-                                    {% for i in director %}
-                                    {{ i.title }}
+                                {% for i in director %}
+                                    {{i.full_name}}
                                   {% endfor %}
                                 </p>
                                 <h1 class="h6 mb-0 mt-3 font-weight-bold text-gray-900">Writers</h1>
                                 <p> {% for i in writers %}
-                                    {{ i.title }}
+                                    {{ i.full_name }}
                                   {% endfor %}</p>
                                 <h1 class="h6 mb-0 mt-3 font-weight-bold text-gray-900">Cast</h1>
                                 <p>
                                     {% for i in actor %}
-                                    {{ i.title }}
+                                    {{ i.full_name }}
                                   {% endfor %}
                                 </p>
                                 <h1 class="h6 mb-0 mt-3 font-weight-bold text-gray-900">Plot</h1>
@@ -122,54 +122,21 @@
                                         <div class="row">
                                             <div class="col-xl-4 col-lg-4">
                                                 <h5 class="h6 mt-0 mb-3 font-weight-bold text-gray-900">CAST</h5>
+                                                <!-- !ACTOR KISMI -->
+                                                {% for i in actor %}
                                                 <div class="artist-list mb-3">
                                                     <a class="d-flex align-items-center" href="#">
                                                         <div class="dropdown-list-image mr-3">
-                                                            <img class="rounded-circle" src="img/s1.png" alt="">
+                                                            <img class="rounded-circle" src="{{i.image.url}}" alt="">
                                                             <div class="status-indicator bg-success"></div>
                                                         </div>
                                                         <div class="font-weight-bold">
-                                                            <div class="text-truncate">Carla Gugino</div>
-                                                            <div class="small text-gray-500">Acting</div>
+                                                            <div class="text-truncate">{{ i.full_name }}</div>
+                                                            <div class="small text-gray-500">{{i.cast_role}}</div>
                                                         </div>
                                                     </a>
                                                 </div>
-                                                <div class="artist-list mb-3">
-                                                    <a class="d-flex align-items-center" href="#">
-                                                        <div class="dropdown-list-image mr-3">
-                                                            <img class="rounded-circle" src="img/s2.png" alt="">
-                                                            <div class="status-indicator bg-success"></div>
-                                                        </div>
-                                                        <div class="font-weight-bold">
-                                                            <div class="text-truncate">Sylvester Stallone</div>
-                                                            <div class="small text-gray-500">Acting</div>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="artist-list mb-3">
-                                                    <a class="d-flex align-items-center" href="#">
-                                                        <div class="dropdown-list-image mr-3">
-                                                            <img class="rounded-circle" src="img/s3.png" alt="">
-                                                            <div class="status-indicator bg-success"></div>
-                                                        </div>
-                                                        <div class="font-weight-bold">
-                                                            <div class="text-truncate">Rose Byrne</div>
-                                                            <div class="small text-gray-500">Acting</div>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="artist-list mb-3">
-                                                    <a class="d-flex align-items-center" href="#">
-                                                        <div class="dropdown-list-image mr-3">
-                                                            <img class="rounded-circle" src="img/s4.png" alt="">
-                                                            <div class="status-indicator bg-success"></div>
-                                                        </div>
-                                                        <div class="font-weight-bold">
-                                                            <div class="text-truncate">Jason Statham</div>
-                                                            <div class="small text-gray-500">Acting</div>
-                                                        </div>
-                                                    </a>
-                                                </div>
+                                                {% endfor %}
                                             </div>
                                             <div class="col-xl-4 col-lg-4">
                                                 <h5 class="h6 mt-0 mb-3 font-weight-bold text-gray-900">CREW</h5>

@@ -3,9 +3,16 @@ from .models import *
 # Register your models here.
 
 class CastAdmin(admin.ModelAdmin):
-    list_display = ('full_name',)
+    list_display = ('full_name','gender','cast_role')
+    list_filter = ('gender','cast_role')
+    search_fields = ('full_name','description')
+
+
 
 class MovieAdmin(admin.ModelAdmin):
+    list_display = ('title',)
+    list_filter = ('category','language')
+    search_fields = ('title','description')
     readonly_fields = ('slug',)
 
 
