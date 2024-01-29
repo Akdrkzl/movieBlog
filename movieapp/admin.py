@@ -8,6 +8,8 @@ class CastAdmin(admin.ModelAdmin):
     search_fields = ('full_name','description')
 
 
+class CategoryAdmin(admin.ModelAdmin):
+    readonly_fields = ('slug',)
 
 class MovieAdmin(admin.ModelAdmin):
     list_display = ('title',)
@@ -19,6 +21,6 @@ class MovieAdmin(admin.ModelAdmin):
 
 admin.site.register(Cast_Role)
 admin.site.register(Cast,CastAdmin)
-admin.site.register(Category)
+admin.site.register(Category,CategoryAdmin)
 admin.site.register(Video)
 admin.site.register(Movie,MovieAdmin)

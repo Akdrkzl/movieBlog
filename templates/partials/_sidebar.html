@@ -8,9 +8,10 @@
         <div class="sidebar-brand-text mx-3"><img src="{% static 'img/logo.png' %}" alt=""></div>
     </a>
 
-    <li class="nav-item {% if request.path == '/movies/' %}
-    active 
-    {% endif %}">
+    <li class="nav-item 
+     {% if request.path == '/movies/' or request.path == '/movies-category/'|add:c_slug|add:'/' %}
+        active 
+     {% endif %}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseZero"
             aria-expanded="true" aria-controls="collapseZero">
             <i class="fas fa-fw fa-film"></i>
@@ -20,9 +21,9 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{% url 'movies' %}">
                     <span>All Movies</span></a>
-
-                <a class="collapse-item" href="movies-detail.html">Movie Detail</a>
-
+                {% for i in category %}
+                <a class="collapse-item" href="{% url 'movies-category' i.slug %}">{{i.title}}</a>
+                {% endfor %}
             </div>
         </div>
     </li>
