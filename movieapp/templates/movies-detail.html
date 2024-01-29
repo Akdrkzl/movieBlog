@@ -57,10 +57,18 @@
                                 <div class="row d-flex align-items-center justify-content-between p-3 border-bottom">
                                     <div class="col-lg-7 m-b-4">
                                         <h3 class="text-gray-900 mb-0 mt-0 font-weight-bold">{{movie.title}}
-                                            <small>2019</small></h3>
-                                        <p class="mb-0 text-gray-800"><small class="text-muted"><i
-                                                    class="fas fa-film fa-fw fa-sm mr-1"></i> Action / Adventure /
-                                                Science Fiction / 3D</small></p>
+                                            <small>{{movie.release_date|date:"Y"}}</small></h3>
+
+                                        <p class="mb-0 text-gray-800">
+                                            <small class="text-muted">
+                                                <i class="fas fa-film fa-fw fa-sm mr-1"></i> 
+                                                <!-- Action / Adventure / Science Fiction / 3D -->
+                                                {% for i in category %}
+                                                    {{i.title}} /
+                                                {% endfor %}
+                                            </small>
+                                        </p>
+
                                     </div>
                                     <div class="col-lg-5 text-right">
                                         <a href="#" class="d-sm-inline-block btn btn-primary shadow-sm"><i
@@ -73,7 +81,7 @@
                                     <div class="col-lg-6 m-b-4">
                                         <p class="mb-0 text-gray-900"><i class="fas fa-money-bill fa-sm fa-fw mr-1"></i>
                                             BUDGET - <span
-                                                class="text-white rounded px-2 py-1 bg-info">${{movie.budget}}</span></p>
+                                                class="text-white rounded px-2 py-1 bg-info">${{movie.budget|floatformat:0}}</span></p>
                                     </div>
                                     <div class="col-lg-6 text-right">
                                         <a href="#" class="btn btn-sm btn-primary btn-circle">
@@ -120,76 +128,62 @@
                                     <div class="tab-pane fade" id="profile" role="tabpanel"
                                         aria-labelledby="profile-tab">
                                         <div class="row">
-                                            <div class="col-xl-4 col-lg-4">
+                                            <!-- !ACTOR -->
+                                            <div class="col-xl-6 col-lg-6">
                                                 <h5 class="h6 mt-0 mb-3 font-weight-bold text-gray-900">CAST</h5>
-                                                <!-- !ACTOR KISMI -->
-                                                {% for i in actor %}
+                                                {% for a in actor %}
                                                 <div class="artist-list mb-3">
                                                     <a class="d-flex align-items-center" href="#">
                                                         <div class="dropdown-list-image mr-3">
-                                                            <img class="rounded-circle" src="{{i.image.url}}" alt="">
+                                                            <img class="rounded-circle" src="{{a.image.url}}" alt="">
                                                             <div class="status-indicator bg-success"></div>
                                                         </div>
                                                         <div class="font-weight-bold">
-                                                            <div class="text-truncate">{{ i.full_name }}</div>
-                                                            <div class="small text-gray-500">{{i.cast_role}}</div>
+                                                            <div class="text-truncate">{{ a.full_name }}</div>
+                                                            <div class="small text-gray-500">{{a.cast_role}}</div>
                                                         </div>
                                                     </a>
                                                 </div>
                                                 {% endfor %}
                                             </div>
-                                            <div class="col-xl-4 col-lg-4">
+
+                                            <!-- !CREW -->
+                                            <div class="col-xl-6 col-lg-6 ">
                                                 <h5 class="h6 mt-0 mb-3 font-weight-bold text-gray-900">CREW</h5>
+                                                {% for d in director %}
                                                 <div class="artist-list mb-3">
                                                     <a class="d-flex align-items-center" href="#">
                                                         <div class="dropdown-list-image mr-3">
-                                                            <img class="rounded-circle" src="img/s3.png" alt="">
+                                                            <img class="rounded-circle" src="{{d.image.url}}" alt="">
                                                             <div class="status-indicator bg-success"></div>
                                                         </div>
                                                         <div class="font-weight-bold">
-                                                            <div class="text-truncate">Rose Byrne</div>
-                                                            <div class="small text-gray-500">Acting</div>
+                                                            <div class="text-truncate">{{d.full_name}}</div>
+                                                            <div class="small text-gray-500">{{d.cast_role}}</div>
                                                         </div>
                                                     </a>
                                                 </div>
+                                                {% endfor %}
+
+                                                {% for w in writers %}
                                                 <div class="artist-list mb-3">
                                                     <a class="d-flex align-items-center" href="#">
                                                         <div class="dropdown-list-image mr-3">
-                                                            <img class="rounded-circle" src="img/s4.png" alt="">
+                                                            <img class="rounded-circle" src="{{w.image.url}}" alt="">
                                                             <div class="status-indicator bg-success"></div>
                                                         </div>
                                                         <div class="font-weight-bold">
-                                                            <div class="text-truncate">Jason Statham</div>
-                                                            <div class="small text-gray-500">Acting</div>
+                                                            <div class="text-truncate">{{w.full_name}}</div>
+                                                            <div class="small text-gray-500">{{w.cast_role}}</div>
                                                         </div>
                                                     </a>
                                                 </div>
-                                                <div class="artist-list mb-3">
-                                                    <a class="d-flex align-items-center" href="#">
-                                                        <div class="dropdown-list-image mr-3">
-                                                            <img class="rounded-circle" src="img/s1.png" alt="">
-                                                            <div class="status-indicator bg-success"></div>
-                                                        </div>
-                                                        <div class="font-weight-bold">
-                                                            <div class="text-truncate">Carla Gugino</div>
-                                                            <div class="small text-gray-500">Acting</div>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="artist-list mb-3">
-                                                    <a class="d-flex align-items-center" href="#">
-                                                        <div class="dropdown-list-image mr-3">
-                                                            <img class="rounded-circle" src="img/s2.png" alt="">
-                                                            <div class="status-indicator bg-success"></div>
-                                                        </div>
-                                                        <div class="font-weight-bold">
-                                                            <div class="text-truncate">Sylvester Stallone</div>
-                                                            <div class="small text-gray-500">Acting</div>
-                                                        </div>
-                                                    </a>
-                                                </div>
+                                                {% endfor %}
+                                                
                                             </div>
-                                            <div class="col-xl-4 col-lg-4">
+
+                                            <!--! SUPPORT -->
+                                            <!-- <div class="col-xl-4 col-lg-4">
                                                 <h5 class="h6 mt-0 mb-3 font-weight-bold text-gray-900">Support</h5>
                                                 <div class="artist-list mb-3">
                                                     <a class="d-flex align-items-center" href="#">
@@ -203,81 +197,63 @@
                                                         </div>
                                                     </a>
                                                 </div>
-                                                <div class="artist-list mb-3">
-                                                    <a class="d-flex align-items-center" href="#">
-                                                        <div class="dropdown-list-image mr-3">
-                                                            <img class="rounded-circle" src="img/s2.png" alt="">
-                                                            <div class="status-indicator bg-success"></div>
-                                                        </div>
-                                                        <div class="font-weight-bold">
-                                                            <div class="text-truncate">Sylvester Stallone</div>
-                                                            <div class="small text-gray-500">Acting</div>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="artist-list mb-3">
-                                                    <a class="d-flex align-items-center" href="#">
-                                                        <div class="dropdown-list-image mr-3">
-                                                            <img class="rounded-circle" src="img/s3.png" alt="">
-                                                            <div class="status-indicator bg-success"></div>
-                                                        </div>
-                                                        <div class="font-weight-bold">
-                                                            <div class="text-truncate">Rose Byrne</div>
-                                                            <div class="small text-gray-500">Acting</div>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="artist-list mb-3">
-                                                    <a class="d-flex align-items-center" href="#">
-                                                        <div class="dropdown-list-image mr-3">
-                                                            <img class="rounded-circle" src="img/s4.png" alt="">
-                                                            <div class="status-indicator bg-success"></div>
-                                                        </div>
-                                                        <div class="font-weight-bold">
-                                                            <div class="text-truncate">Jason Statham</div>
-                                                            <div class="small text-gray-500">Acting</div>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
+                                            </div> -->
+
                                         </div>
                                     </div>
+                                    <!-- !VİDEO -->
                                     <div class="tab-pane fade" id="videos" role="tabpanel" aria-labelledby="videos-tab">
                                         <div class="row">
+                                            {% for i in movie.video_url.all %}
+                                            
+                                            {% if i.url_first %}
                                             <div class="col-xl-6 col-lg-6">
                                                 <div class="mb-4">
                                                     <iframe width="100%" height="215"
-                                                        src="https://www.youtube.com/embed/uNppTCoYdWI" frameborder="0"
+                                                        src="https://www.youtube.com/embed/{{i.url_first}}" frameborder="0"
                                                         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                                                         allowfullscreen></iframe>
                                                 </div>
                                             </div>
+                                            {% endif %}
+
+                                            {% if i.url_second %}
                                             <div class="col-xl-6 col-lg-6">
                                                 <div class="mb-4">
                                                     <iframe width="100%" height="215"
-                                                        src="https://www.youtube.com/embed/XkT6uwHFUKY" frameborder="0"
+                                                        src="https://www.youtube.com/embed/{{i.url_second}}" frameborder="0"
                                                         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                                                         allowfullscreen></iframe>
                                                 </div>
                                             </div>
+                                            {% endif %}
+
+                                            {% if i.url_third %}
                                             <div class="col-xl-6 col-lg-6">
                                                 <div class="mb-4">
                                                     <iframe width="100%" height="215"
-                                                        src="https://www.youtube.com/embed/uNppTCoYdWI" frameborder="0"
+                                                        src="https://www.youtube.com/embed/{{i.url_third}}" frameborder="0"
                                                         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                                                         allowfullscreen></iframe>
                                                 </div>
                                             </div>
+                                            {% endif %}
+
+                                            {% if i.url_fourth %}
                                             <div class="col-xl-6 col-lg-6">
                                                 <div class="mb-4">
                                                     <iframe width="100%" height="215"
-                                                        src="https://www.youtube.com/embed/XkT6uwHFUKY" frameborder="0"
+                                                        src="https://www.youtube.com/embed/{{i.url_fourth}}" frameborder="0"
                                                         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                                                         allowfullscreen></iframe>
                                                 </div>
                                             </div>
+                                            {% endif %}
+
+                                            {% endfor %}   
                                         </div>
                                     </div>
+
                                     <div class="tab-pane fade" id="contact" role="tabpanel"
                                         aria-labelledby="contact-tab">
                                         <div class="card-body p-0 reviews-card">

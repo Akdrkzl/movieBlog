@@ -8,11 +8,25 @@
         <div class="sidebar-brand-text mx-3"><img src="{% static 'img/logo.png' %}" alt=""></div>
     </a>
 
-    <li class="nav-item active">
-        <a class="nav-link" href="movies.html">
+    <li class="nav-item {% if request.path == '/movies/' %}
+    active 
+    {% endif %}">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseZero"
+            aria-expanded="true" aria-controls="collapseZero">
             <i class="fas fa-fw fa-film"></i>
             <span>Movies</span></a>
+        </a>
+        <div id="collapseZero" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{% url 'movies' %}">
+                    <span>All Movies</span></a>
+
+                <a class="collapse-item" href="movies-detail.html">Movie Detail</a>
+
+            </div>
+        </div>
     </li>
+
     <li class="nav-item">
         <a class="nav-link" href="events.html">
             <i class="fas fa-fw fa-glass-cheers"></i>

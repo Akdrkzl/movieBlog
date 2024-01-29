@@ -51,6 +51,16 @@ class Category(models.Model):
     def __str__(self):
         return self.title
 
+class Video(models.Model):
+    title = models.CharField(max_length=50)
+    url_first = models.CharField(max_length=200,blank=True)
+    url_second = models.CharField(max_length=200,blank=True)
+    url_third = models.CharField(max_length=200,blank=True)
+    url_fourth = models.CharField(max_length=200,blank=True)
+
+    def __str__(self):
+        return self.title
+
 class Movie(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField(max_length=500)
@@ -60,9 +70,9 @@ class Movie(models.Model):
     cover_image = models.ImageField(upload_to='movie-pic')
     image = models.ImageField(upload_to='movie-pic')
     release_date = models.DateField()
-    video = models.FileField(upload_to='movie-video')
     slug = AutoSlugField(populate_from='title')
 
+    video_url = models.ManyToManyField(Video,blank=True)
     category = models.ManyToManyField(Category)
     cast = models.ManyToManyField(Cast)
 

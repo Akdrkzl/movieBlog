@@ -20,4 +20,5 @@ class MovieAdmin(admin.ModelAdmin):
 admin.site.register(Cast_Role)
 admin.site.register(Cast,CastAdmin)
 admin.site.register(Category)
+admin.site.register(Video)
 admin.site.register(Movie,MovieAdmin)

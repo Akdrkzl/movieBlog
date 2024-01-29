@@ -141,3 +141,6 @@ MESSAGE_TAGS = {
     messages.WARNING : 'alert-warning',
     messages.INFO : 'alert-primary'
 }
+
+#Global değişken girilen sayı değerleri üç basamağa ayrılır
+USE_THOUSAND_SEPARATOR = True
