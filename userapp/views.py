@@ -24,3 +24,12 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect('index')
+
+def user_register(request):
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login') #1.yöntem doğrudan login sayfasında yönlendirme yapıyoruz.
+    form = UserRegisterForm()
+    return render(request,'register.html',{'form':form})
