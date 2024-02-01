@@ -29,7 +29,15 @@ def user_register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
+            form_user = form.save(commit=False)
+            username = form.cleaned_data.get('email')
+            form_user.username = username
             form.save()
             return redirect('login') #1.yöntem doğrudan login sayfasında yönlendirme yapıyoruz.
     form = UserRegisterForm()
     return render(request,'register.html',{'form':form})
+
+
+
+def user_profile(request):
+    return render(request,'profile.html')
