@@ -17,10 +17,16 @@ class MovieAdmin(admin.ModelAdmin):
     search_fields = ('title','description')
     readonly_fields = ('slug',)
 
-
+class MovieFavListAdmin(admin.ModelAdmin):
+    list_display = ('user','get_favlist')
+    
+    def get_favlist(self,obj):
+        return "\n".join([movie.title for movie in obj.favorite_movie.all()])
+    
 
 admin.site.register(Cast_Role)
 admin.site.register(Cast,CastAdmin)
 admin.site.register(Category,CategoryAdmin)
 admin.site.register(Video)
 admin.site.register(Movie,MovieAdmin)
+admin.site.register(MovieFavList,MovieFavListAdmin)

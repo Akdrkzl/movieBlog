@@ -63,18 +63,26 @@
                                             <small class="text-muted">
                                                 <i class="fas fa-film fa-fw fa-sm mr-1"></i> 
                                                 <!-- Action / Adventure / Science Fiction / 3D -->
-                                                {% for i in category %}
+                                                {% for i in category_detial %}
                                                     {{i.title}} /
                                                 {% endfor %}
                                             </small>
                                         </p>
 
                                     </div>
-                                    <div class="col-lg-5 text-right">
-                                        <a href="#" class="d-sm-inline-block btn btn-primary shadow-sm"><i
-                                                class="fas fa-share-alt"></i></a>
-                                        <a href="#" class="d-sm-inline-block btn btn-danger shadow-sm"> Add to Watchlist
-                                            <i class="fas fa-plus fa-sm  ml-1"></i></a>
+                                    <div class="col-lg-5 d-flex justify-content-end text-right">
+                                        <a href="#" class="d-sm-inline-block btn btn-primary shadow-sm">
+                                            <i class="fas fa-share-alt"></i>
+                                        </a>
+                                        <form class="" method="POST" action="{% url 'movie-favlist' %}">
+                                            {% csrf_token %}
+                                            <input class="" type="text" name="favlist" value="{{movie.slug}}" hidden>
+                                            <button type="submit" class="d-sm-inline-block btn btn-danger shadow-sm"> 
+                                                Add to Watchlist
+                                                <i class="fas fa-plus fa-sm  ml-1"></i>
+                                            </button>
+                                        </form>
+                                   
                                     </div>
                                 </div>
                                 <div class="row d-flex align-items-center justify-content-between py-3 px-4">
