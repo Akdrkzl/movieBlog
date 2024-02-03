@@ -25,12 +25,17 @@ def movies_detail(request,d_slug):
     writers = movie.cast.filter(cast_role__title ='Writers')
     actor = movie.cast.filter(cast_role__title ='Actor')
 
+    favlist =MovieFavList.objects.get(user = request.user)
+    favliste = favlist.favorite_movie.all()
+    print(favliste)
+
     context = {
         'movie':movie,
         'category_detial':category_detial,
         'director':director,
         'writers':writers,
         'actor':actor,
+        'favliste':favliste,
     }
     return render(request,'movies-detail.html',context)
 
@@ -54,3 +59,13 @@ def movies_favlist(request):
         user_favlist,created = MovieFavList.objects.get_or_create(user = request.user)
         user_favlist.favorite_movie.add(movie)
     return redirect('index')
+
+
+# def movies_favlist_delete(request):
+#     if request.method == 'POST':
+#         slug = request.POST['favlistdelete']
+#         movie = get_object_or_404(MovieFavList, slug = slug)
+#         print(slug)
+#         print(movie)
+#         movie.delete()
+#     return redirect('index')
