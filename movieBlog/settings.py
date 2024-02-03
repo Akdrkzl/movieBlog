@@ -173,3 +173,6 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 } 
+
+#customuser
+AUTH_USER_MODEL = 'userapp.CustomUser'
