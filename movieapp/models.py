@@ -55,9 +55,5 @@ class Movie(models.Model):
 
 
 class MovieFavList(models.Model):
-    # title = models.CharField(max_length=100)
-    # language = models.CharField(max_length=20)
-    # image = models.ImageField(upload_to='movie-pic')
-    # release_date = models.DateField()
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     favorite_movie = models.ManyToManyField(Movie)

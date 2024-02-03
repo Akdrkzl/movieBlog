@@ -1,6 +1,7 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
+from movieapp.models import MovieFavList
 from .forms import *
 from .models import *
 
@@ -48,4 +49,21 @@ def user_profile(request):
             form.save()
             return redirect('profile')
     form = UserUpdate(instance=user)
-    return render(request,'profile.html',{'form':form})
+    
+    #manyt to many ilişkili yapıyı böyle seçeriz
+    favlist =MovieFavList.objects.get(user = request.user)
+    favliste = favlist.favorite_movie.all()
+    print(favliste)
+
+
+    
+    # for fav_list_item in favlist:
+    #     for movie in fav_list_item.favorite_movie.all():
+    #         print(movie.title)
+
+    context = {
+        'form':form,
+        'favlist':favlist
+    }
+
+    return render(request,'profile.html',context)
