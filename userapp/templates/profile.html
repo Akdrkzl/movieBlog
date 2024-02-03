@@ -188,7 +188,9 @@
                                         </div>
 
                                         <div class="row">
-                                            {% for i in favlist.favorite_movie.all %}
+                                            {% if favliste %}
+                                            
+                                            {% for i in favliste %}
                                                 <div class="col-xl-3 col-md-6 mb-4">
                                                     <div class="card m-card shadow border-0">
                                                         <a href="{% url 'movies-detial' i.slug %}">
@@ -222,6 +224,9 @@
                                                     </div>
                                                 </div>
                                             {% endfor %}
+                                            {% else %}
+                                            <p>boş</p>
+                                            {% endif %}
                                         </div> 
                                     </div>
                                     <!-- yourlist -->

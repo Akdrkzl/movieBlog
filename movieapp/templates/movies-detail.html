@@ -74,25 +74,24 @@
                                         <a href="#" class="d-sm-inline-block btn btn-primary shadow-sm">
                                             <i class="fas fa-share-alt"></i>
                                         </a>
-                                        {% if favlist %}
-                                        <form class="" method="POST" action="{% url 'movie-favlist' %}">
-                                            {% csrf_token %}
-                                            <input class="" type="text" name="favlist" value="{{movie.slug}}" hidden>
-                                            <button type="submit" class="d-sm-inline-block btn btn-danger shadow-sm"> 
-                                                Add to Watchlist
-                                                <i class="fas fa-plus fa-sm  ml-1"></i>
-                                            </button>
-                                        </form>
+                                        {% if favliste %}
+                                            <form class="" method="POST" action="{% url 'movie-favlist-delete' %}">
+                                                {% csrf_token %}
+                                                <input type="text" name="favlistslug" value="{{movie.slug}}" hidden>
+                                                <button type="submit" class="d-sm-inline-block btn btn-danger shadow-sm"> 
+                                                    Remove to Watchlist
+                                                    <i class="fas fa-minus fa-sm  ml-1"></i>
+                                                </button>
+                                            </form>  
                                         {% else %}
-                                        <p>sil</p>
-                                        {% comment %} <form class="" method="POST" action="{% url 'movie-favlist-delete' %}">
-                                            {% csrf_token %}
-                                            <input class="" type="text" name="favlistdelete" value="{{movie.slug}}" hidden>
-                                            <button type="submit" class="d-sm-inline-block btn btn-danger shadow-sm"> 
-                                                Remove to Watchlist
-                                                <i class="fas fa-minus fa-sm  ml-1"></i>
-                                            </button>
-                                        </form>  {% endcomment %}
+                                            <form class="" method="POST" action="{% url 'movie-favlist' %}">
+                                                {% csrf_token %}
+                                                <input class="" type="text" name="favlist" value="{{movie.slug}}" hidden>
+                                                <button type="submit" class="d-sm-inline-block btn btn-danger shadow-sm"> 
+                                                    Add to Watchlist
+                                                    <i class="fas fa-plus fa-sm  ml-1"></i>
+                                                </button>
+                                            </form>
                                         {% endif %}
                                    
                                     </div>

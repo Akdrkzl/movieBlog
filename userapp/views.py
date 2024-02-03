@@ -51,19 +51,14 @@ def user_profile(request):
     form = UserUpdate(instance=user)
     
     #manyt to many ilişkili yapıyı böyle seçeriz
-    favlist =MovieFavList.objects.get(user = request.user)
-    favliste = favlist.favorite_movie.all()
-    print(favliste)
-
-
-    
-    # for fav_list_item in favlist:
-    #     for movie in fav_list_item.favorite_movie.all():
-    #         print(movie.title)
+    try:
+        favlist =MovieFavList.objects.get(user = request.user)
+        favliste = favlist.favorite_movie.all()
+    except MovieFavList.DoesNotExist:
+        favliste = None
 
     context = {
         'form':form,
-        'favlist':favlist
+        'favliste':favliste
     }
-
     return render(request,'profile.html',context)

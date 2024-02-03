@@ -25,9 +25,14 @@ def movies_detail(request,d_slug):
     writers = movie.cast.filter(cast_role__title ='Writers')
     actor = movie.cast.filter(cast_role__title ='Actor')
 
-    favlist =MovieFavList.objects.get(user = request.user)
-    favliste = favlist.favorite_movie.all()
-    print(favliste)
+    # try:
+    #     favlist =MovieFavList.objects.get(user = request.user)
+    #     favliste = favlist.favorite_movie.all()
+    #     # print(favliste)
+    # except MovieFavList.DoesNotExist:
+    #     favliste = None
+
+    favliste = MovieFavList.objects.filter(favorite_movie = movie, user = request.user)
 
     context = {
         'movie':movie,
@@ -54,18 +59,16 @@ def movies_favlist(request):
     if request.method == 'POST':
         slug = request.POST['favlist']
         movie = get_object_or_404(Movie, slug = slug)
-        print(slug)
-        print(movie)
         user_favlist,created = MovieFavList.objects.get_or_create(user = request.user)
         user_favlist.favorite_movie.add(movie)
-    return redirect('index')
+        return redirect('movies-detial', d_slug = slug)
 
 
-# def movies_favlist_delete(request):
-#     if request.method == 'POST':
-#         slug = request.POST['favlistdelete']
-#         movie = get_object_or_404(MovieFavList, slug = slug)
-#         print(slug)
-#         print(movie)
-#         movie.delete()
-#     return redirect('index')
+def movies_favlist_delete(request):
+    if request.method == 'POST':
+        slug = request.POST['favlistslug']
+        movie = Movie.objects.get(slug = slug)
+        fav_movie = MovieFavList.objects.get(favorite_movie = movie)
+        print(fav_movie)
+        fav_movie.delete()
+        return redirect('movies-detial', d_slug = slug)
