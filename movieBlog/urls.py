@@ -21,7 +21,10 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # google
+    path("", include("allauth.urls")),
+    # app
     path('',include('movieapp.urls')),
     path('',include('userapp.urls')),
-    path("", include("allauth.urls")),
+    path('',include('castapp.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
