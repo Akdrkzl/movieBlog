@@ -67,8 +67,13 @@ def movies_favlist(request):
 def movies_favlist_delete(request):
     if request.method == 'POST':
         slug = request.POST['favlistslug']
+        print(slug)
         movie = Movie.objects.get(slug = slug)
-        fav_movie = MovieFavList.objects.get(favorite_movie = movie)
+        print(movie)
+        #birden fazla nesne içeren bir objeyi silmek istiyorsak filter ile o objeyi seçip sileriz.get kullanmak hata verir 
+        fav_movie = MovieFavList.objects.filter(favorite_movie = movie)
         print(fav_movie)
+        # fav_movie = get_object_or_404(MovieFavList, favorite_movie = movie)
+        # print(fav_movie)
         fav_movie.delete()
         return redirect('movies-detial', d_slug = slug)

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'movieapp',
     'castapp', 
     'userapp',
+    'commentapp',
     
     # google
     'django.contrib.sites',

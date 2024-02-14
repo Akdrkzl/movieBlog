@@ -3,15 +3,10 @@ from autoslug import AutoSlugField
 from castapp.models import *
 from userapp.models import CustomUser
 
-
 # Create your models here.
-
-
-
 class Category(models.Model):
     title = models.CharField(max_length=50)
     slug = AutoSlugField(populate_from='title')
-
 
     def __str__(self):
         return self.title

@@ -1,33 +1,23 @@
 {% extends "base.html" %}
 {% load static %}
-
 {% block content %}
-
     <div id="page-top">
-
         <div id="wrapper">
-
             {% include "partials/_sidebar.html" %}
-
-
             <div id="content-wrapper" class="d-flex flex-column">
-
                 <div id="content">
                     {% include "partials/_navbar.html" %}
-            
                     <div class="container-fluid">
-
                         <div class="d-sm-flex align-items-center justify-content-between mt-4 mb-3">
                             <h1 class="h5 mb-0 text-gray-900">Actor/Writer/Director</h1>
                         </div>
-
                         <div class="row">
                             <div class="col-xl-12 col-lg-12">
                                 <div class="row">
                                     {% for i in cast  %}
                                     <div class="col-xl-4 col-md-6 mb-4">
                                         <div class="card p-card shadow border-0">
-                                        <a href="people-detail.html">
+                                        <a href="{% url 'cast-detial' i.slug %}">
                                         <div class="row no-gutters">
                                         <div class="col-md-4">
                                         <img src="{{i.image.url}}" class="card-img" alt="...">
@@ -39,8 +29,9 @@
                                             <p class="card-text">
                                                 <small>
                                                     <span class="text-muted pr-2">
-                                                <i class="fas fa-film fa-sm ml-1"></i> 
-                                                Acting</span> <span class="text-link">{{i.birth}}</span>
+                                                    <i class="fas fa-birthday-cake fa-sm ml-1"></i> 
+                                                    Birth</span> 
+                                                    <span class="text-link">{{i.birth}}</span>
                                                 </small>
                                             </p>
                                             </div>
@@ -53,17 +44,12 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
-
         </div>
         <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
         </a>
     </div>
-
 {% endblock content %}

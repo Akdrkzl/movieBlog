@@ -1,4 +1,6 @@
 from django.db import models
+from autoslug import AutoSlugField
+
 
 # Create your models here.
 class Cast_Role(models.Model):
@@ -28,6 +30,8 @@ class Cast(models.Model):
     gender = models.CharField("Cinsiyet",max_length=1, choices=genders)
     birth = models.DateField()
     location = models.CharField(max_length=50)
+    slug = AutoSlugField(populate_from='full_name')
+
 
     cast_role = models.ForeignKey(Cast_Role, on_delete = models.CASCADE,verbose_name='Görev')
 
